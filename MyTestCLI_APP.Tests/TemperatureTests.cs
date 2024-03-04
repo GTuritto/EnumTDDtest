@@ -23,6 +23,8 @@ public class TemperatureTests
 
         // Assert
         Assert.That(actualRange, Is.EqualTo(expectedRange));
+
+        Temperature.DestroyInstance();
     }
 
 // I am using the Enum  for testing functionality
@@ -43,5 +45,21 @@ public class TemperatureTests
 
         // Assert
         Assert.That(actualMessage, Is.EqualTo(expectedMessage));
+
+        Temperature.DestroyInstance();
+    }
+ 
+    [TestCase(500)]
+    public void TemperatureFeelsLike_ShouldThrowException(int temperature)
+    {
+        var instance = Temperature.GetInstance(temperature);
+
+        // Act & Assert
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            instance.TemperatureFeelsLike();
+        },  "Temperature must be between -20 and 50.");
+
+        Temperature.DestroyInstance();
     }
 }
