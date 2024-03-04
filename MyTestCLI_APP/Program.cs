@@ -11,16 +11,15 @@ class Program
         // validate the input is not null an integer and is between the range -15 and 45
         if (int.TryParse(input, out int inputTemp) && inputTemp >= -30 && inputTemp <= 60) 
         {
-            // Set the temperature value
-            Temperature.Instance.SetTemperature(inputTemp);
+            Temperature tempInstance = Temperature.GetInstance(inputTemp);
 
             // Get the temperature value
-            int temperature = Temperature.Instance.TemperatureValue;
+            int temperature = tempInstance.TemperatureValue;
 
             // Display the temperature value
             Console.WriteLine($"The temperature is {temperature} degrees.");
 
-            Console.WriteLine($"And {Temperature.Instance.GetTemperatureMessage(Temperature.Instance.GetTemperatureRange())}");
+            Console.WriteLine($"And {tempInstance.TemperatureFeelsLikeMessage(tempInstance.TemperatureFeelsLike())}");
         }
         else
         {
